@@ -53,6 +53,22 @@ app.use(cors(corsOptions)); // Voeg dit toe om CORS te activeren
 app.use(helmet());
 app.use("/api/contact", limiter);
 
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"], // Alleen resources van je eigen domein toestaan
+    },
+  })
+);
+
+app.use(
+  helmet.hsts({
+    maxAge: 31536000, // 1 jaar in seconden
+    includeSubDomains: true, // HSTS toepassen op subdomeinen
+    preload: true, // Laat je domein pre-loaden in HSTS lijsten
+  })
+);
+
 app.options("/api/contact", cors(corsOptions)); // Allow preflight requests
 
 // POST route voor contactformulier
