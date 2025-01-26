@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contactformulier</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <form id="contactForm">
+          <h2>Contact Formulier</h2>
+          <label for="name">Naam</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Jouw naam"
+            required
+          />
+
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Jouw e-mail"
+            required
+          />
+
+          <label for="message">Bericht</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Jouw bericht"
+            required
+          ></textarea>
+
+          <button type="submit">Verstuur</button>
+        </form>
+        <div id="loader" class="loader"></div>
+        <div id="responseMessage"></div>
+      </div>
+    </div>
+  </body>
+</html>
