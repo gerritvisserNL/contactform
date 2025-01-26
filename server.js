@@ -57,6 +57,14 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"], // Alleen resources van je eigen domein toestaan
+      scriptSrc: [
+        "'self'",
+        "https://contactform-htfd.onrender.com/api/contact",
+      ],
+      connectSrc: [
+        "'self'",
+        "https://contactform-htfd.onrender.com/api/contact",
+      ],
     },
   })
 );
