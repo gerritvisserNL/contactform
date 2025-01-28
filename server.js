@@ -5,6 +5,7 @@ import rateLimit from "express-rate-limit";
 import sanitizeHtml from "sanitize-html";
 import helmet from "helmet";
 import csrf from "csurf";
+import cookieParser from "cookie-parser";
 
 // CSRF-beveiliging instellen
 const csrfProtection = csrf({
@@ -61,6 +62,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(cors(corsOptions));
 app.use(helmet());
+app.use(cookieParser());
 app.use("/api/contact", limiter);
 app.use(csrfProtection); // Gebruik enkel csrfProtection hier
 
