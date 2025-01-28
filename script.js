@@ -29,11 +29,17 @@ document
       return;
     }
 
+    // Verkrijg het CSRF-token uit de meta-tag
+    const csrfToken = document
+      .querySelector('meta[name="csrf-token"]')
+      .getAttribute("content");
+
     // Bereid de payload voor
     const payload = {
       name,
       email,
       message,
+      _csrf: csrfToken, // Voeg het CSRF-token toe aan de payload
     };
 
     // Verstuur gegevens naar de API
@@ -44,6 +50,7 @@ document
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "CSRF-Token": csrfToken, // Voeg het CSRF-token toe aan de header
           },
           body: JSON.stringify(payload),
         }
