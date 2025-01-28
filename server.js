@@ -20,6 +20,7 @@ const corsOptions = {
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "CSRF-Token"],
   credentials: true,
+  optionsSuccessStatus: 204,
 };
 
 const app = express();
@@ -53,6 +54,8 @@ const sanitizeInput = (input) => {
   });
 };
 
+app.set("view engine", "ejs");
+
 // Middleware
 app.use(express.json());
 app.use(express.static("public"));
@@ -68,10 +71,12 @@ app.use(
       scriptSrc: [
         "'self'",
         "https://contactform-htfd.onrender.com/api/contact",
+        "https://www.gerritvisser.nl",
       ],
       connectSrc: [
         "'self'",
         "https://contactform-htfd.onrender.com/api/contact",
+        "https://www.gerritvisser.nl",
       ],
     },
   })
@@ -90,6 +95,10 @@ app.options("/api/contact", cors(corsOptions)); // Allow preflight requests
 // GET route voor CSRF-token
 app.get("/api/csrf-token", (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
+});
+
+app.get("/", (req, res) => {
+  res.render("index", { csrfToken: req.csrfToken() });
 });
 
 // POST route voor contactformulier
